@@ -15,8 +15,6 @@ public class AdminController {
     @Autowired
     private ProductService  productService;
 
-
-
     @PostMapping("/add")
     public ResponseEntity<Product> addProduct(@RequestBody Product newProdect){
         return new ResponseEntity<>(productService.newProduct(newProdect), HttpStatus.CREATED);
