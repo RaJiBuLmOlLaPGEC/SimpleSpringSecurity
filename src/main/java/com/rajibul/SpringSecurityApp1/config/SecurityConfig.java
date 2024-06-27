@@ -1,5 +1,6 @@
 package com.rajibul.SpringSecurityApp1.config;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -52,12 +53,14 @@ public class SecurityConfig {
 
 //**************************New Version Of SpringSecurity*******************
         httpSecurity
-                .csrf(csrf -> csrf.disable()) // Updated way to disable CSRF
+                .csrf(csrf -> csrf.
+                        disable()) // Updated way to disable CSRF
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/products").permitAll()
                         .requestMatchers("/products/{id}").authenticated()
 //                                .requestMatchers("/products/{id}").hasRole("ADMIN")
-                ).formLogin(withDefaults());
+                )
+                .formLogin(withDefaults());
 
         return httpSecurity.build();
 

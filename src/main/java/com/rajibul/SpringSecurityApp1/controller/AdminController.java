@@ -17,28 +17,28 @@ public class AdminController {
     private ProductService  productService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Product> addProduct(@RequestBody Product newProdect){
         return new ResponseEntity<>(productService.newProduct(newProdect), HttpStatus.CREATED);
     }
     @PutMapping("/update")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Product> updateProduct(@RequestBody Product newProdect){
         return new ResponseEntity<>(productService.updateProductDetails(newProdect),HttpStatus.CREATED);
     }
 
     @DeleteMapping ("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteProduct(@PathVariable Integer id){
         return new ResponseEntity<>(productService.deleteProduct(id),HttpStatus.CREATED);
     }
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Product> getProduct(@PathVariable Integer id){
         return new ResponseEntity<>(productService.findProduct(id), HttpStatus.CREATED);
     }
     @GetMapping("")
-//    @PreAuthorize("hasAuthority('ROLE_USER')")
+//    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<Product>> getAllProduct(){
         return new ResponseEntity<>(productService.getAllProduct(), HttpStatus.CREATED);
     }

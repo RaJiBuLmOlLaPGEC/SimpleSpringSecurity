@@ -10,10 +10,10 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
 
-@RestControllerAdvice
+//@RestControllerAdvice
 public class GlobalExceptionHandller {
 
-    @ExceptionHandler(Exception.class)
+//    @ExceptionHandler(Exception.class)
     public ResponseEntity<MyException> allExceptionHandler(Exception e, WebRequest req){
 
         MyException ex=new MyException();
