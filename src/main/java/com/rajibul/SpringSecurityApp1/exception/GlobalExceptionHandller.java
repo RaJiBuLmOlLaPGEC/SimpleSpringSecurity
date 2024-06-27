@@ -14,13 +14,13 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandller {
 
 //    @ExceptionHandler(Exception.class)
-    public ResponseEntity<MyException> allExceptionHandler(Exception e, WebRequest req){
-
-        MyException ex=new MyException();
-        ex.setTimeStamp(LocalDateTime.now());
-        ex.setMessage(e.getMessage());
-        ex.setDetails(req.getDescription(false));
-
-        return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    public ResponseEntity<MyException> allExceptionHandler(Exception e, WebRequest req){
+//
+//        MyException ex=new MyException();
+//        ex.setTimeStamp(LocalDateTime.now());
+//        ex.setMessage(e.getMessage());
+//        ex.setDetails(req.getDescription(false));
+//
+//        return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 }

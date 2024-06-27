@@ -1,8 +1,11 @@
 package com.rajibul.SpringSecurityApp1.config;
 
+import com.rajibul.SpringSecurityApp1.service.UserInfoUserDetalsService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,19 +27,20 @@ public class SecurityConfig {
 
     //Authentication
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder){
-        UserDetails admin= User.withUsername("Rajib")
-                .password(encoder.encode("12345"))
-                .roles("ADMIN")
-                .build();
-
-        UserDetails user= User.withUsername("John")
-                .password(encoder.encode("1234"))
-                .roles("USER")
-                .build();
+    public UserDetailsService userDetailsService(){
+//        UserDetails admin= User.withUsername("Rajib")
+//                .password(encoder.encode("12345"))
+//                .roles("ADMIN")
+//                .build();
+//
+//        UserDetails user= User.withUsername("John")
+//                .password(encoder.encode("1234"))
+//                .roles("USER")
+//                .build();
 
         //Create two user and save these inside inmemory.
-        return new InMemoryUserDetailsManager(admin,user);
+//        return new InMemoryUserDetailsManager(admin,user);
+        return  new UserInfoUserDetalsService();
     }
 
     //to use normal password to hash password
@@ -72,5 +76,14 @@ public class SecurityConfig {
 //                .authorizeHttpRequests().requestMatchers("/products/**")
 //                .authenticated().and().formLogin().and().build();
 //        return null;
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider dao=new DaoAuthenticationProvider();
+        dao.setPasswordEncoder(passwordEncoder());
+        dao.setUserDetailsService(userDetailsService());
+        return dao;
+
     }
 }
